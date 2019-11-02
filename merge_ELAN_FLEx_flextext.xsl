@@ -15,12 +15,33 @@ DESCRIPTION:
 
 This takes an ELAN .flextext transcription file (export FLExtext from ELAN), and combines it with the interlinear morphological analysis of the same transcript, produced in Flex. This is necessary because not all ELAN tiers survive the import-interlinearise-export journey through Flex. Custom tiers are simply removed by FLEx. So we recombine FLEx's morphological analysis with the origianl .flextxt file exported from ELAN.  The FLEx .flextext file also has a different structure and sometimes creates multiple top-level tiers (from FLEx) for a single top-level tier (in ELAN).
 
+###############
+REQUIREMENTS:
+	JAVA must be installed.
+		- See this https://java.com/en/download/help/download_options.xml
+		
+	SAXON must be installed.
+		- Can be downloaded (as of 01 NOV 2019) at:
+			http://www.saxonica.com/download/java.xml ===> Click "Download Latest Version"
+			
+			- You can download the .zip version and extract to a directory of your choosing
+			- Lets assume the root directory (on Windows) or in the user's home (on POSIX)
+			- In other words, we assume:
+				C:\saxon (Windows)
+				~/saxon (Windows)
+				
+		- From installation directory, we need to call Java to run the Saxon .jar file
+
+########################
+HOW TO RUN THIS SCRIPT:
+########################
+
 1) Open a command prompt / terminal -> in the directory where the .flextext files are located.
 2) Follow the usage/examples below for your operating system.
 =============================================================================================================================
 ::NOTE::
-	The default Windows installation directory is:		C:\xspec\
-	The default Mac/Linux installation directory is:	~/xspec (where ~ means "user's home directory")
+	Windows installation directory:		C:\saxon\
+	Mac/Linux installation directory:	~/saxon (where ~ means "user's home directory")
 =============================================================================================================================
 
 ###############
@@ -33,7 +54,7 @@ java -jar -Xmx1024m "PATH\TO\saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl 
 WINDOWS EXAMPLE:
 #################
 
-java -jar -Xmx1024m "C:\xspec\saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -s:LangName_ELAN.flextext FLEx=LangName_FLEx.flextext -o:LangName_MERGED.flextext
+java -jar -Xmx1024m "C:\saxon\saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -s:LangName_ELAN.flextext FLEx=LangName_FLEx.flextext -o:LangName_MERGED.flextext
 
 ####################################
 POSIX USAGE: (Mac OSX, Unix, Linux)
@@ -45,7 +66,7 @@ java -jar -Xmx1024m "PATH/TO/saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl 
 POSIX EXAMPLE: (Mac OSX, Unix, Linux)
 ######################################
 
-java -jar -Xmx1024m "~/xspec/saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -s:LangName_ELAN.flextext FLEx=LangName_FLEx.flextext -o:LangName_MERGED.flextext
+java -jar -Xmx1024m "~/saxon/saxon9he.jar" -t -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -xsl:merge_ELAN_FLEx_flextext.xsl overwrite=no -s:LangName_ELAN.flextext FLEx=LangName_FLEx.flextext -o:LangName_MERGED.flextext
 
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
